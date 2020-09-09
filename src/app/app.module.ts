@@ -12,7 +12,10 @@ import { MaterialModule } from './material/material.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ImageGridComponent } from './components/image-grid/image-grid.component';
+import { ImageGridComponent, ImageDialogComponent } from './components/image-grid/image-grid.component';
+import { MainComponent } from './components/main/main.component';
+import { SearchOptionsComponent } from './components/search-options/search-options.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,9 @@ import { ImageGridComponent } from './components/image-grid/image-grid.component
     FooterComponent,
     HeaderComponent,
     ImageGridComponent,
+    MainComponent,
+    SearchOptionsComponent,
+    ImageDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,9 +35,12 @@ import { ImageGridComponent } from './components/image-grid/image-grid.component
     FormsModule,
     FlexLayoutModule,    
     HttpClientModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ImageDialogComponent]
+
 })
 export class AppModule { }

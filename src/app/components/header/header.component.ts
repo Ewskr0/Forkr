@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { FlickrService } from 'src/app/services/flickr.service';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -7,14 +6,13 @@ import { FlickrService } from 'src/app/services/flickr.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  default_value = "random";
+  @Output() parentSearch = new EventEmitter<string>();
 
   ngOnInit(){
   }
-  constructor(private flickrService: FlickrService) { }
 
   search(event: any) {
-    this.flickrService.search(event.target.value.toLowerCase());
+    this.parentSearch.emit(event.target.value.toLowerCase());
   }
 
 }

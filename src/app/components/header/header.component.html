@@ -1,12 +1,9 @@
-<mat-toolbar>
-    <mat-toolbar-row fxFlex="60" class="header">
-        <span class="title-header">Forkr</span>
-        <span class="spacer"></span>
-        <mat-form-field appearance="fill" class="header-form-field"> 
-      <input matInput placeholder="Photos.."  (keyup)="search($event)">
+<mat-toolbar class="header">
+  <mat-toolbar-row fxFlex="60" class="row-header">
+    <span class="title-header">Forkr</span>
+    <span class="spacer"></span>
+    <mat-form-field appearance="fill" class="header-form-field">
+      <input matInput placeholder="Photos.." (keyup)="search($event)" />
     </mat-form-field>
-        </mat-toolbar-row>
+  </mat-toolbar-row>
 </mat-toolbar>
-
-
-

@@ -1,0 +1,41 @@
+<div
+  fxFlex="60"
+  fxLayoutAlign="space-around center"
+  class="search-options"
+>
+  <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-around stretch">
+    <div fxLayout="column"  fxFlex="20">
+      <mat-form-field appearance="fill">
+        <mat-label>Minimum size</mat-label>
+        <mat-select [(value)]="selectedSize" (change)="sizeSelected()"  placeholder="Minimum size<">
+          <mat-option> None</mat-option>
+          <mat-option value="url_s">Small</mat-option>
+          <mat-option value="url_m">Medium</mat-option>
+          <mat-option value="url_L">Large</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="column" fxFlex="30">
+      <div fxLayout="row" fxLayoutAlign="space-around stretch">
+        <mat-form-field>
+            <input matInput [matDatepicker]="pickerFrom" placeholder="From date"
+                   (dateChange)="dateFromChange($event)">
+            <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFrom></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput [matDatepicker]="pickerTo" placeholder="To date"
+                   (dateChange)="dateToChange($event)">
+            <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+            <mat-datepicker #pickerTo></mat-datepicker>
+          </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <button mat-button (click)="refreshImages()">
+        <mat-icon>autorenew</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

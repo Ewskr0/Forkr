@@ -1,13 +1,15 @@
-<div
-  fxLayout="row"
-  fxLayout.xs="column"
-  fxLayoutWrap
-  fxLayoutGap="0.5%"
-  fxLayoutAlign="center"
->
-  <mat-card class="card-picture" *ngFor="let image of images">
-    <a href="{{ image.url }}_b.jpg">
-      <img mat-card-image src="{{ image.url }}_m.jpg"/>
-    </a>
-  </mat-card>
+<div class="cardList" fxFlex="60">
+  <ng-container *ngFor="let image of images">
+    <div class="cardListItem">
+      <a  (click)="openDialog(image)">
+        <img mat-card-image src="{{ image.url }}_m.jpg" />
+      </a>
+    </div>
+  </ng-container>
 </div>
+<div
+  infiniteScroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="50"
+  (scrolled)="onScroll()"
+></div>

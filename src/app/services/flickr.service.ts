@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Subject } from 'rxjs/internal/Subject';
 
 export interface FlickrPhoto {
   farm: string;
@@ -21,17 +20,20 @@ export interface FlickrOutput {
 @Injectable({
   providedIn: 'root'
 })
-
+  
 export class FlickrService {
   prevKeyword: string;
   currPage = 1;
   images = [];
   value : string;
-  imagesChange: Subject<boolean> = new Subject<boolean>();
+  selectedSize: string;
+  selectedDateFrom;
+  selectedDateTo;
 
   constructor(private http: HttpClient) { 
     
   }
+
 
   search_keyword(keyword: string) {
     if (this.prevKeyword === keyword) {
@@ -41,7 +43,11 @@ export class FlickrService {
     }
     this.prevKeyword = keyword;
     const url = 'https://www.flickr.com/services/rest/?method=flickr.photos.search&';
-    const params = `api_key=${environment.flickr.key}&text=${keyword}&format=json&nojsoncallback=1&per_page=12&page=${this.currPage}`;
+    const paramsSize = this.selectedSize && this.selectedSize.length > 0 ? "&extras=" + this.selectedSize : '';
+    const paramsDateFrom = this.selectedDateFrom  ? "&min_upload_date=" + this.selectedDateFrom.getTime()/1000 : '';
+    const paramsDateTo = this.selectedDateTo  ? "&max_upload_date=" + this.selectedDateTo.getTime()/1000 : '';
+
+    const params = `api_key=${environment.flickr.key}&text=${keyword}&format=json&nojsoncallback=1&per_page=12&page=${this.currPage}` + paramsSize + paramsDateFrom;
 
     return this.http.get(url + params).pipe(map((res: FlickrOutput) => {
       const urlArr = [];
@@ -54,26 +60,5 @@ export class FlickrService {
       });
       return urlArr;
     }));
-  }
-
-  search(value: string) {
-    if (value && value.length > 0) {
-      this.value = value;
-      this.search_keyword(this.value)
-      .toPromise()
-      .then(res => {
-        this.images = res;
-      });
-    }
-  }
-
-  onScroll() {
-    if (this.value && this.value.length > 0) {
-      this.search_keyword(this.value)
-      .toPromise()
-      .then(res => {
-        this.images = this.images.concat(res);
-      });
-    }
   }
 }
