@@ -1,0 +1,13 @@
+<div
+  fxLayout="row"
+  fxLayout.xs="column"
+  fxLayoutWrap
+  fxLayoutGap="0.5%"
+  fxLayoutAlign="center"
+>
+  <mat-card class="card-picture" *ngFor="let image of images">
+    <a href="{{ image.url }}_b.jpg">
+      <img mat-card-image src="{{ image.url }}_m.jpg"/>
+    </a>
+  </mat-card>
+</div>
