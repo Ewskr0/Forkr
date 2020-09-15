@@ -1,2 +1,11 @@
-<mat-dialog-content>{{data.title}}</mat-dialog-content>
-<mat-dialog-actions></mat-dialog-actions>
+<span mat-dialog-title>{{data.title}}</span>
+<mat-dialog-content>
+    <div row class="cardList"  fxLayoutAlign="space-around stretch">
+        <img mat-card-image src="{{ data.url }}_m.jpg" />
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+    <button mat-button (click)="openImage(data.url)" target="_blank">Open</button>
+
+</mat-dialog-actions>

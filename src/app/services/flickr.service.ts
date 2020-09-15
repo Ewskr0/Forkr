@@ -27,13 +27,11 @@ export class FlickrService {
   images = [];
   value : string;
   selectedSize: string;
-  selectedDateFrom;
-  selectedDateTo;
+  selectedDateFrom: Date;
+  selectedDateTo: Date;
 
   constructor(private http: HttpClient) { 
-    
   }
-
 
   search_keyword(keyword: string) {
     if (this.prevKeyword === keyword) {

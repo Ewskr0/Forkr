@@ -12,7 +12,6 @@ export class ImageGridComponent implements OnChanges {
 
   constructor(public dialog: MatDialog) { 
  }
-//"{{ image.url }}_b.jpg
  ngOnChanges() {
 }
   
@@ -24,7 +23,7 @@ export class ImageGridComponent implements OnChanges {
     
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = true;
+    dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     dialogConfig.data = { title: image.title, url: image.url };
     dialogConfig.width = '250px';
@@ -33,13 +32,15 @@ export class ImageGridComponent implements OnChanges {
   }
 }
 
-
 @Component({
   selector: 'app-image-dialog',
   templateUrl: './image-dialog.component.html',
 })
 export class ImageDialogComponent {
   
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
+  openImage(image: string) { 
+    window.open(image + "_b.jpg", '_blank');
+  }  
 }
