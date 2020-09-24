@@ -11,6 +11,12 @@ export interface FlickrPhoto {
   title: string;
 }
 
+export interface FlickrPhotoInfo {
+  owner: any;
+  title: any;
+  description: any;
+  dates: any;
+}
 export interface FlickrOutput {
   photos: {
     photo: FlickrPhoto[];
@@ -52,7 +58,8 @@ export class FlickrService {
       res.photos.photo.forEach((ph: FlickrPhoto) => {
         const photoObj = {
           url: `https://farm${ph.farm}.staticflickr.com/${ph.server}/${ph.id}_${ph.secret}`,
-          title: ph.title
+          title: ph.title,
+          id: ph.id
         };
         urlArr.push(photoObj);
       });
