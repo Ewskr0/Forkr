@@ -26,19 +26,17 @@ body {
   z-index: 150;
 }
 
-
-
 .row-header {
   margin: 0 auto;
 }
 
-.search-options{
-padding-top: 64px;
-margin: 1em auto;
-flex: 1 1 100%;
-border-bottom: 0.1em solid;
-border-color: lightslategray;
-color: black!important;
+.search-options {
+  padding-top: 64px;
+  margin: 1em auto;
+  flex: 1 1 100%;
+  border-bottom: 0.1em solid;
+  border-color: lightslategray;
+  color: black !important;
 }
 .header-form-field {
   font-size: 14px;
@@ -69,9 +67,7 @@ color: black!important;
 .cardList > * {
   box-sizing: border-box;
 }
-.cardList > *:not(:last-child) {
-  margin-right: 32px;
-}
+
 .cardListItem {
   flex: 0 1 calc(33.3% - 32px);
 }
@@ -96,10 +92,12 @@ footer {
   font-family: open sans, sans-serif;
 }
 
-.mat-select-value, .mat-form-field-label, .mat-button-wrapper{
-  color:black!important;
+.mat-select-value,
+.mat-form-field-label,
+.mat-button-wrapper {
+  color: black !important;
 }
 
 .mat-form-field-infix {
-  width: 80px!important;
+  width: 80px !important;
 }

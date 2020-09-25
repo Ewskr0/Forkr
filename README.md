@@ -2,6 +2,18 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.0.
 
+## Features
+
+This project allows you to search for images using the flickr API.
+The infinite scroll is implemented that allows to load results to infinity.
+2 filters are currently available:
+
+- Minimum size.
+
+- From Date to Date.
+
+When an image is selected, its details are displayed as well as the option to open it in a new tab.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

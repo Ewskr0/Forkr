@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
 import { HttpClientModule } from '@angular/common/http';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { FormsModule } from '@angular/forms';
@@ -12,7 +11,10 @@ import { MaterialModule } from './material/material.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ImageGridComponent, ImageDialogComponent } from './components/image-grid/image-grid.component';
+import {
+  ImageGridComponent,
+  ImageDialogComponent,
+} from './components/image-grid/image-grid.component';
 import { MainComponent } from './components/main/main.component';
 import { SearchOptionsComponent } from './components/search-options/search-options.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -33,14 +35,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
-    FlexLayoutModule,    
+    FlexLayoutModule,
     HttpClientModule,
     InfiniteScrollModule,
     ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [ImageDialogComponent]
-
+  entryComponents: [ImageDialogComponent],
 })
-export class AppModule { }
+export class AppModule {}

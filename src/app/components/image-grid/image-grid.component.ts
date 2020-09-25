@@ -1,5 +1,6 @@
 import { Component, OnChanges, Input, Output, EventEmitter, Inject } from '@angular/core';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogConfig} from '@angular/material/dialog';
+import { FlickrService } from 'src/app/services/flickr.service';
 
 @Component({
   selector: 'app-image-grid',
@@ -10,8 +11,9 @@ export class ImageGridComponent implements OnChanges {
   @Input() images: any[];
   @Output("parentOnScroll") parentOnScroll: EventEmitter<any> = new EventEmitter();
 
-  constructor(public dialog: MatDialog) { 
- }
+  constructor(public dialog: MatDialog, private flickrService: FlickrService) { 
+  }
+
  ngOnChanges() {
 }
   
@@ -21,14 +23,19 @@ export class ImageGridComponent implements OnChanges {
 
   openDialog(image: any): void {
     
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = false;
-    dialogConfig.autoFocus = true;
-    dialogConfig.data = { title: image.title, url: image.url };
-    dialogConfig.width = '250px';
     
-    this.dialog.open(ImageDialogComponent,dialogConfig);
+    const dialogConfig = new MatDialogConfig();
+    let photoDetails  :any;
+     this.flickrService.get_details(image.id).toPromise()
+    .then(res => {
+      photoDetails = res;
+      dialogConfig.disableClose = false;
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = { title: image.title, url: image.url, details:photoDetails};
+      dialogConfig.width = '350px';
+      
+      this.dialog.open(ImageDialogComponent,dialogConfig);
+    });
   }
 }
 

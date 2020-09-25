@@ -11,12 +11,6 @@ export interface FlickrPhoto {
   title: string;
 }
 
-export interface FlickrPhotoInfo {
-  owner: any;
-  title: any;
-  description: any;
-  dates: any;
-}
 export interface FlickrOutput {
   photos: {
     photo: FlickrPhoto[];
@@ -24,20 +18,18 @@ export interface FlickrOutput {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-  
 export class FlickrService {
   prevKeyword: string;
   currPage = 1;
   images = [];
-  value : string;
+  value: string;
   selectedSize: string;
   selectedDateFrom: Date;
   selectedDateTo: Date;
 
-  constructor(private http: HttpClient) { 
-  }
+  constructor(private http: HttpClient) {}
 
   search_keyword(keyword: string) {
     if (this.prevKeyword === keyword) {
@@ -46,24 +38,58 @@ export class FlickrService {
       this.currPage = 1;
     }
     this.prevKeyword = keyword;
-    const url = 'https://www.flickr.com/services/rest/?method=flickr.photos.search&';
-    const paramsSize = this.selectedSize && this.selectedSize.length > 0 ? "&extras=" + this.selectedSize : '';
-    const paramsDateFrom = this.selectedDateFrom  ? "&min_upload_date=" + this.selectedDateFrom.getTime()/1000 : '';
-    const paramsDateTo = this.selectedDateTo  ? "&max_upload_date=" + this.selectedDateTo.getTime()/1000 : '';
+    const url =
+      'https://www.flickr.com/services/rest/?method=flickr.photos.search&';
+    const paramsSize =
+      this.selectedSize && this.selectedSize.length > 0
+        ? '&extras=' + this.selectedSize
+        : '';
+    const paramsDateFrom = this.selectedDateFrom
+      ? '&min_upload_date=' + this.selectedDateFrom.getTime() / 1000
+      : '';
+    const paramsDateTo = this.selectedDateTo
+      ? '&max_upload_date=' + this.selectedDateTo.getTime() / 1000
+      : '';
 
-    const params = `api_key=${environment.flickr.key}&text=${keyword}&format=json&nojsoncallback=1&per_page=12&page=${this.currPage}` + paramsSize + paramsDateFrom;
+    const params =
+      `api_key=${environment.flickr.key}&text=${keyword}&format=json&nojsoncallback=1&per_page=12&page=${this.currPage}` +
+      paramsSize +
+      paramsDateFrom;
 
-    return this.http.get(url + params).pipe(map((res: FlickrOutput) => {
-      const urlArr = [];
-      res.photos.photo.forEach((ph: FlickrPhoto) => {
-        const photoObj = {
-          url: `https://farm${ph.farm}.staticflickr.com/${ph.server}/${ph.id}_${ph.secret}`,
-          title: ph.title,
-          id: ph.id
+    return this.http.get(url + params).pipe(
+      map((res: FlickrOutput) => {
+        const urlArr = [];
+        res.photos.photo.forEach((ph: FlickrPhoto) => {
+          const photoObj = {
+            url: `https://farm${ph.farm}.staticflickr.com/${ph.server}/${ph.id}_${ph.secret}`,
+            title: ph.title,
+            id: ph.id,
+          };
+          urlArr.push(photoObj);
+        });
+        return urlArr;
+      })
+    );
+  }
+
+  get_details(id: string) {
+    const url =
+      'https://www.flickr.com/services/rest/?method=flickr.photos.getInfo&';
+    const params = `api_key=${environment.flickr.key}&photo_id=${id}&format=json&nojsoncallback=1`;
+
+    return this.http.get(url + params).pipe(
+      map((res: any) => {
+        console.log(res);
+
+        let date = new Date(res.photo.dateuploaded * 1000).toLocaleDateString();
+        const photoInfo = {
+          owner: res.photo.owner.username,
+          title: res.photo.title._content,
+          description: res.photo.description._content,
+          date: date,
         };
-        urlArr.push(photoObj);
-      });
-      return urlArr;
-    }));
+        return photoInfo;
+      })
+    );
   }
 }

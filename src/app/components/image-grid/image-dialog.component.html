@@ -1,11 +1,17 @@
-<span mat-dialog-title>{{data.title}}</span>
+<span mat-dialog-title>{{ data.title }}</span>
 <mat-dialog-content>
-    <div row class="cardList"  fxLayoutAlign="space-around stretch">
-        <img mat-card-image src="{{ data.url }}_m.jpg" />
+  <div row class="cardList" fxLayoutAlign="space-around stretch">
+    <div fxLayout="row">
+      <h3>Description: {{ data.details.description }}</h3>
     </div>
+    <img mat-card-image src="{{ data.url }}_m.jpg" />
+    <div fxLayout="column">
+      <h4>Author: {{ data.details.owner }}</h4>
+      <h4>Published: {{ data.details.date }}</h4>
+    </div>
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-button mat-dialog-close>Close</button>
-    <button mat-button (click)="openImage(data.url)" target="_blank">Open</button>
-
+  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button (click)="openImage(data.url)" target="_blank">Open</button>
 </mat-dialog-actions>
