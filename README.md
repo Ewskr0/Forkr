@@ -4,8 +4,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Features
 
-This project allows you to search for images using the flickr API.
-The infinite scroll is implemented that allows to load results to infinity.
+This project allows you to search images using the flickr API.
+The infinite scroll is implemented that allows you to load results to infinity.
 2 filters are currently available:
 
 - Minimum size.
